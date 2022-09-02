@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-jobs": "node ./scripts/list_jobs.js"
   },
   "homepage": "https://grim-jokes.github.io/blog/",
   "dependencies": {
     "next": "12.2.5",
     "react": "18.2.0",
+    "react-chrono": "^1.19.1",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
