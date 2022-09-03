@@ -1,0 +1,25 @@
+
+.timelineWrapper {
+  width: 100%;
+}
+
+.timeline {
+  color: black
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .card,
+  .footer {
+    border-color: #222;
+  }
+  .code {
+    background: #111;
+  }
+}
+

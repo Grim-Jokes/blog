@@ -1,9 +1,29 @@
-import { Chrono } from 'react-chrono'
-import { TimelineItemModel } from 'react-chrono/dist/models/TimelineItemModel'
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import { Job } from './utils/getJobs'
+import styles from '../styles/Timeline.module.css'
 
 interface TimelineProps {
   jobs: Job[]
+}
+
+function toTimelineElement(j: Job, key: number): JSX.Element {
+  return (
+    <VerticalTimelineElement
+      date={j.period}
+      key={key}
+      className={[styles.timelineCard].join(' ')}
+      iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+      icon={<svg className="workIcon" />}
+    >
+      <div className={styles.timelineCardContent}>
+        <h3 className={styles.cardSubTitle}>{j.name}</h3>
+        <h4 className={styles.cardTitle}>{j.startDate + " - " + j.endDate}</h4>
+        <ul>
+          {j.accomplishments.filter(l => l).map((l, i) => <li key={i}>{l}</li>)}
+        </ul>
+      </div>
+    </VerticalTimelineElement>
+  )
 }
 
 const Timeline = ({ jobs }: TimelineProps) => {
@@ -12,30 +32,17 @@ const Timeline = ({ jobs }: TimelineProps) => {
     return null
   }
 
-  const data: TimelineItemModel[] = jobs
-    .map((j, i): TimelineItemModel => {
-      return {
-        id: i.toString(),
-        title: j.period,
-        cardTitle: j.name,
-        cardSubtitle: `${j.startDate} - ${j.endDate}`,
-        cardDetailedText: j.accomplishments
-      }
-    });
+  const data = jobs.map(toTimelineElement)
 
   console.log(data);
 
   return (
-    <div style={{ width: "50%", height: "1000px" }}>
-      <Chrono 
-        title='Experience'
-        enableOutline={true} 
-        items={data} 
-        mode= {'VERTICAL_ALTERNATING'}
-        allowDynamicUpdate
-        borderLessCards={true}
-        useReadMore={false}
-      />
+    <div className={styles.timelineWrapper}>
+      <VerticalTimeline
+        className={styles.timeline}
+      >
+        {data}
+      </VerticalTimeline>
     </div>
   )
 }

@@ -15,12 +15,24 @@ a {
   box-sizing: border-box;
 }
 
+body {
+  color: black;
+  background: #AAA;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
     color: white;
-    background: black;
+    background: #222;
   }
+}
+
+
+svg.workIcon {
+  background-image: url("/icons/work.svg");
+  mask: url("/icons/work.svg") center/cover no-repeat;
+  background:white;
 }
