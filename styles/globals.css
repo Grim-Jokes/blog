@@ -29,10 +29,3 @@ body {
     background: #222;
   }
 }
-
-
-svg.workIcon {
-  background-image: url("/icons/work.svg");
-  mask: url("/icons/work.svg") center/cover no-repeat;
-  background:white;
-}

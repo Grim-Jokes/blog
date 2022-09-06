@@ -1,6 +1,9 @@
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import { Job } from './utils/getJobs'
-import styles from '../styles/Timeline.module.css'
+import { Job } from './utils/getJobs';
+import styles from '../styles/Timeline.module.css';
+import iconStyles from '../styles/WorkIcon.module.css';
+import { WorkIcon } from './workIcon';
+
 
 interface TimelineProps {
   jobs: Job[]
@@ -13,7 +16,8 @@ function toTimelineElement(j: Job, key: number): JSX.Element {
       key={key}
       className={[styles.timelineCard].join(' ')}
       iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      icon={<svg className="workIcon" />}
+      iconClassName={iconStyles.workIcon}
+      icon={<WorkIcon />}
     >
       <div className={styles.timelineCardContent}>
         <h3 className={styles.cardSubTitle}>{j.name}</h3>
