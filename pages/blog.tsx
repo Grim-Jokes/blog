@@ -5,8 +5,8 @@ const Blog: NextPage = () => {
   return (
     <div className={styles.container}>
         <main className={styles.main}>
-        <h1 className={styles.title}>
-          Comming soon!
+        <h1 className={"display-large"}>
+          Coming soon!
         </h1>
       </main>
     </div>

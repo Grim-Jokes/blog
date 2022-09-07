@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useEffect } from 'react'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -8,31 +9,31 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Head>
         <title>Daniel Szekely</title>
-        <meta name="description" content="" />
-        <link rel="icon" href="favicon.ico" />
+        <meta name="description" content="Daniel Szekely" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1 className={"display-large"}>
           Daniel Szekely
         </h1>
         <div>
-          <span className={styles.description}>
+          <span className={"display-small"}>
             The path splits two ways
           </span>
         </div>
         <div className={styles.grid}>
           <Link href="/resume">
             <a className={styles.card}>
-              <h2>Resume &rarr;</h2>
-              <p>Work History</p>
+              <h2 className='title-medium'>&larr; Resume</h2>
+              <p className='body-small'>Work History</p>
             </a>
           </Link>
 
           <Link href="/blog">
             <a className={styles.card}>
-              <h2>Blog &rarr;</h2>
-              <p>Sporradic thoughts and feelings about programming things</p>
+              <h2 className="title-medium">Blog &rarr;</h2>
+              <p className='body-medium'>Sporradic thoughts and feelings about programming things</p>
             </a>
           </Link>
 

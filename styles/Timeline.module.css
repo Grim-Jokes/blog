@@ -4,22 +4,13 @@
 }
 
 .timeline {
-  color: black
+  --line-color: var(--md-ref-palette-tertiary40);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
+h2.header {
+  color: var(--md-ref-on-surfce-variant-text)
 }
 
+.listItem {
+  margin-bottom: 5px;
+}

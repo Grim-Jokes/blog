@@ -1,4 +1,9 @@
 .workIcon{
-  fill: white;
-  background-color: #2194f3
+  fill: var(--md-ref-palette-secondary100);
+}
+
+@media (prefers-color-scheme: dark) {
+  .workIcon {
+    fill: var(--md-sys-color-on-tertiary-dark);
+  }
 }
