@@ -12,15 +12,16 @@ function toTimelineElement(j: Job, key: number): JSX.Element {
   return (
     <VerticalTimelineElement
       date={j.startDate + " - " + j.endDate}
+      dateClassName="on-backaground-text"
       key={key}
       iconClassName={["tertiary", "on-tertiary-text"].join(' ')}
-      dateClassName="on-backaground-text"
       intersectionObserverProps={{
       }}
       icon={<WorkIcon />}
     >
       <div className='on-surface-variant-text'>
-        <h2 className={[styles.header, "on-surface-variant-text", "title-large"].join(' ')}>{j.name}</h2>
+        <h1 className={[styles.header, "on-surface-variant-text", "title-large"].join(' ')}>{j.name}</h1>
+        <h2 className={[styles.header, "on-surface-variant-text", "title-large"].join(' ')}>{j.role}</h2>
         <ul className='body-large'>
           {j.accomplishments.filter(l => l).map((l, i) => <li className={styles.listItem} key={i}>{l}</li>)}
         </ul>
@@ -29,16 +30,23 @@ function toTimelineElement(j: Job, key: number): JSX.Element {
   )
 }
 
+function byStartDate(a: Job, b: Job) {
+  let aStart = new Date("1/" + a.startDate);
+  let bStart = new Date("1/" + b.startDate)
+
+  return bStart.getTime() - aStart.getTime()
+}
+
 const Timeline = ({ jobs }: TimelineProps) => {
 
   if (jobs.length == 0) {
     return null
   }
 
-  const data = jobs.map(toTimelineElement)
+  const data = jobs.sort(byStartDate).map(toTimelineElement)
 
   return (
-    <div className={styles.timelineWrapper}>
+    <div>
       <VerticalTimeline
         className={[styles.timeline, "on-background-text"].join(' ')}
       >

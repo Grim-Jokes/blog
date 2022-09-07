@@ -1,8 +1,4 @@
 
-.timelineWrapper {
-  width: 100%;
-}
-
 .timeline {
   --line-color: var(--md-ref-palette-tertiary40);
 }
@@ -13,4 +9,5 @@ h2.header {
 
 .listItem {
   margin-bottom: 5px;
+  list-style-type: circle;
 }
