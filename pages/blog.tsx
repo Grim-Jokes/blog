@@ -26,7 +26,7 @@ const Blog: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={[styles.list, 'surface-variant', 'on-surface-variant-text'].join(' ')}>
-          <BlogList blogList={blogs} onClick={(entry) => {
+          <BlogList blogList={blogs} listItemClassName={styles.listItem} onClick={(entry) => {
             setSelectedPost(entry)
           }} />
         </div>
