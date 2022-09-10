@@ -24,9 +24,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://pandoc/latex:2.9
+      options: --entrypoint=sh
+    steps:
+      - uses: actions/checkout@v2
+      - name: prepare output directories
+        run: mkdir -p public/blog
+      - name: convert md to html
+        run: |
+          find ./blog -iname '*.md' -type f -exec sh -c 'echo "${0}" && pandoc ${0} -o public/blog/.${0%.md}.html' {} \;
+      - uses: actions/upload-artifact@master
+        with:
+          name: "transformed posts"
+          path: ./public/blog
   # Build job
   build:
     runs-on: ubuntu-latest
+    needs: convert_via_pandoc
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -74,6 +91,11 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate-jobs-list
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Download artifact
+        uses: actions/download-artifact@master
+        with:
+          name: "transformed posts"
+          path: ./public/blog
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Static HTML export with Next.js
@@ -89,7 +111,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+      - build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
