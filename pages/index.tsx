@@ -1,12 +1,11 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useEffect } from 'react'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div className={[styles.container, "on-background-text"].join(' ')}>
       <Head>
         <title>Daniel Szekely</title>
         <meta name="description" content="Daniel Szekely" />
@@ -22,16 +21,16 @@ const Home: NextPage = () => {
             The path splits two ways
           </span>
         </div>
-        <div className={styles.grid}>
+        <div className={[styles.grid].join(' ')}>
           <Link href="/resume">
-            <a className={styles.card}>
+            <a className={[styles.card, "surface-variant on-surface-variant-text"].join(' ')}>
               <h2 className='title-medium'>&larr; Resume</h2>
               <p className='body-small'>Work History</p>
             </a>
           </Link>
 
           <Link href="/blog">
-            <a className={styles.card}>
+            <a className={[styles.card, "surface-variant on-surface-variant-text"].join(' ')}>
               <h2 className="title-medium">Blog &rarr;</h2>
               <p className='body-medium'>Sporradic thoughts and feelings about programming things</p>
             </a>

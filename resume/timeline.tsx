@@ -46,13 +46,11 @@ const Timeline = ({ jobs }: TimelineProps) => {
   const data = jobs.sort(byStartDate).map(toTimelineElement)
 
   return (
-    <div>
-      <VerticalTimeline
-        className={[styles.timeline, "on-background-text"].join(' ')}
-      >
-        {data}
-      </VerticalTimeline>
-    </div>
+    <VerticalTimeline
+      className={[styles.timeline, "on-background-text"].join(' ')}
+    >
+      {data}
+    </VerticalTimeline>
   )
 }
 
