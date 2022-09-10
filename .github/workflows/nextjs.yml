@@ -30,9 +30,12 @@ jobs:
       image: docker://pandoc/latex:2.9
       options: --entrypoint=sh
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: prepare output directories
-        run: mkdir -p public/blog
+        run: |
+          for d in $(find ./blog/ -type d); do
+            mkdir -p "public/$d"
+          done
       - name: convert md to html
         run: |
           find ./blog -iname '*.md' -type f -exec sh -c 'echo "${0}" && pandoc ${0} -o public/blog/.${0%.md}.html' {} \;

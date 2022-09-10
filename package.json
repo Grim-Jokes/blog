@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-jobs-list": "node ./scripts/list_jobs.js"
+    "generate-jobs-list": "node ./scripts/list_jobs.js",
+    "generate-blog-list": "node ./scripts/list_blogs.js",
+    "new-post": "./scripts/new_post.sh"
   },
   "homepage": "https://grim-jokes.github.io/me/",
   "dependencies": {
