@@ -20,5 +20,5 @@ var getFiles = function (p) {
 }
 
 getFiles(blogPath)
-posts = posts.map((f) => f.replace(process.cwd() + '/', ""))
+posts = posts.map((f) => f.replace(process.cwd() + '/', "").replace('.md', '.html'))
 writeFileSync(blogListPath, JSON.stringify(posts, null, 2));
