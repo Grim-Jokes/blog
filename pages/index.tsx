@@ -1,39 +1,27 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import Timeline from '../resume/timeline'
+import { getJobs, Job } from '../resume/utils/getJobs'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+const Resume: NextPage = () => {
+
+  const [jobs, setJobs] = useState<Job[]>([])
+
+  useEffect(() => {
+    getJobs().then((j: Job[]) => {
+      setJobs(j)
+    })
+  }, [])
+  
   return (
-    <div className={[styles.container, "on-background-text"].join(' ')}>
-      <main className={`${styles.main} body-large`}>
-        <h1 className={"display-large"}>
-          Daniel Szekely
-        </h1>
-        <div>
-          <span className={"display-small"}>
-            The path splits two ways
-          </span>
-        </div>
-        <div className={[styles.grid].join(' ')}>
-          <Link href="/resume">
-            <a className={[styles.card, "surface-variant on-surface-variant-text"].join(' ')}>
-              <h2 className='title-medium'>&larr; Resume</h2>
-              <p className='body-small'>Work History</p>
-            </a>
-          </Link>
-
-          <Link href="/blog">
-            <a className={[styles.card, "surface-variant on-surface-variant-text"].join(' ')}>
-              <h2 className="title-medium">Blog &rarr;</h2>
-              <p className='body-medium'>Sporradic thoughts and feelings about programming things</p>
-            </a>
-          </Link>
-
-        </div>
+    <div className={styles.container}>
+        <main className={styles.main}>
+        <h1 className={styles.title} />
+        <Timeline jobs={jobs} />
       </main>
     </div>
   )
 }
 
-export default Home
+export default Resume
