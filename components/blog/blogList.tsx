@@ -1,37 +1,45 @@
-import { MouseEvent, MouseEventHandler } from "react"
+import { ButtonUnstyled, MenuItemUnstyled, MenuUnstyled } from '@mui/base';
+import { List, ListItemButton } from '@mui/material';
 
 export type OnClickHandler = (entry: string) => void;
 interface BlogListProps {
   blogList: string[]
   onClick: OnClickHandler
   listItemClassName: string
+  selected: string
 }
 
 
-function getToListItem(onClick: OnClickHandler, className: string) {
+function getToListItem(onClick: OnClickHandler, className: string, selected: string) {
   return function toListItem(entry: string, i: number) {
 
     let name = entry.split('/').pop() || ''
     name = name.split('.').shift() || ''
-    name = name.replace("-", " ")
-    name = name.replace(
+    name = name.replaceAll("-", " ")
+    name = name.replaceAll(
       /\w\S*/g,
-      function(txt) {
+      function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       }
     );
 
-    return <li key={i} className={className} onClick={(event) => {
+    const classes = [className];
+
+    if (entry == selected) {
+      classes.push("selected")
+    }
+
+    return <ListItemButton key={i} className={classes.join(' ')} onClick={(event) => {
       event.preventDefault();
       onClick(entry);
     }}>
       <a href={entry}>{name}</a>
-    </li>
+    </ListItemButton>
   }
 }
 
-export function BlogList({ blogList, onClick, listItemClassName }: BlogListProps) {
-  return <ul>
-    {blogList.map(getToListItem(onClick, listItemClassName))}
-  </ul>
+export function BlogList({ blogList, onClick, listItemClassName, selected }: BlogListProps) {
+  return <List>
+    {blogList.map(getToListItem(onClick, listItemClassName, selected))}
+  </List>
 }

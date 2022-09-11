@@ -6,13 +6,7 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <div className={[styles.container, "on-background-text"].join(' ')}>
-      <Head>
-        <title>Daniel Szekely</title>
-        <meta name="description" content="Daniel Szekely" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
+      <main className={`${styles.main} body-large`}>
         <h1 className={"display-large"}>
           Daniel Szekely
         </h1>
