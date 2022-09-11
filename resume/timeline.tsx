@@ -2,6 +2,7 @@ import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeli
 import { Job } from './utils/getJobs';
 import styles from '../styles/Timeline.module.css';
 import { WorkIcon } from './workIcon';
+import { Divider, List, ListItem } from '@mui/material';
 
 
 interface TimelineProps {
@@ -22,9 +23,17 @@ function toTimelineElement(j: Job, key: number): JSX.Element {
       <div className='on-surface-variant-text'>
         <h1 className={[styles.header, "on-surface-variant-text", "title-large"].join(' ')}>{j.name}</h1>
         <h2 className={[styles.header, "on-surface-variant-text", "title-large"].join(' ')}>{j.role}</h2>
-        <ul className='body-large'>
-          {j.accomplishments.filter(l => l).map((l, i) => <li className={styles.listItem} key={i}>{l}</li>)}
-        </ul>
+
+        <List className='body-large'>
+          {j.accomplishments.filter(l => l).map((l, i) => {
+            return <>
+              <ListItem className={styles.listItem} key={i}>
+                {l}
+              </ListItem>
+            </>
+
+          })}
+        </List>
       </div>
     </VerticalTimelineElement>
   )
