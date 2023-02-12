@@ -1,4 +1,3 @@
-import { ButtonUnstyled, MenuItemUnstyled, MenuUnstyled } from '@mui/base';
 import { List, ListItemButton } from '@mui/material';
 
 export type OnClickHandler = (entry: string) => void;

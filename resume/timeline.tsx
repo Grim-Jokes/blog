@@ -1,41 +1,55 @@
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import { Timeline as MuiTimeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineOppositeContent, TimelineSeparator } from '@mui/lab';
 import { Job } from './utils/getJobs';
 import styles from '../styles/Timeline.module.css';
 import { WorkIcon } from './workIcon';
-import { Divider, List, ListItem } from '@mui/material';
+import { List, ListItem, Typography } from '@mui/material';
 
 
 interface TimelineProps {
   jobs: Job[]
 }
 
+function toDateRange(j: Job) {
+  return <>{j.startDate} - {j.endDate}</>
+}
+
+function toAccomplishment(j: Job) {
+  return <>
+    <Typography variant='h5' className={styles.header}>
+      {j.name}
+    </Typography>
+    <Typography variant='h6'>
+      {j.role}
+    </Typography>
+    <List className='body-large'>
+      {j.accomplishments.filter(l => l).map((l, i) => {
+        return <>
+          <ListItem className={styles.listItem} key={i}>
+            {l}
+          </ListItem>
+        </>
+      })}
+    </List>
+  </>
+}
+
 function toTimelineElement(j: Job, key: number): JSX.Element {
   return (
-    <VerticalTimelineElement
-      date={j.startDate + " - " + j.endDate}
-      dateClassName="on-backaground-text"
-      key={key}
-      iconClassName={["tertiary", "on-tertiary-text"].join(' ')}
-      intersectionObserverProps={{
-      }}
-      icon={<WorkIcon />}
-    >
-      <div className='on-surface-variant-text'>
-        <h1 className={[styles.header, "on-surface-variant-text", "title-large"].join(' ')}>{j.name}</h1>
-        <h2 className={[styles.header, "on-surface-variant-text", "title-large"].join(' ')}>{j.role}</h2>
-
-        <List className='body-large'>
-          {j.accomplishments.filter(l => l).map((l, i) => {
-            return <>
-              <ListItem className={styles.listItem} key={i}>
-                {l}
-              </ListItem>
-            </>
-
-          })}
-        </List>
-      </div>
-    </VerticalTimelineElement>
+    <TimelineItem key={key}>
+      <TimelineOppositeContent           sx={{ m: 'auto 0' }}
+          variant="body2">
+        {toDateRange(j)}
+      </TimelineOppositeContent>
+      <TimelineSeparator>
+        <TimelineDot style={{ backgroundColor: "var(--md-sys-color-tertiary)" }} className='tertiary on-tertiary-text'>
+          <WorkIcon width='48px' height='48px' />
+        </TimelineDot>
+        <TimelineConnector />
+      </TimelineSeparator>
+      <TimelineContent className='on-surface-variant-text'>
+        {toAccomplishment(j)}
+      </TimelineContent>
+    </TimelineItem>
   )
 }
 
@@ -55,11 +69,11 @@ const Timeline = ({ jobs }: TimelineProps) => {
   const data = jobs.sort(byStartDate).map(toTimelineElement)
 
   return (
-    <VerticalTimeline
+    <MuiTimeline
       className={[styles.timeline, "on-background-text"].join(' ')}
     >
       {data}
-    </VerticalTimeline>
+    </MuiTimeline>
   )
 }
 

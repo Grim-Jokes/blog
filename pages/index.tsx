@@ -17,8 +17,8 @@ const Resume: NextPage = () => {
   return (
     <div className={styles.container}>
         <main className={styles.main}>
-        <h1 className={styles.title} />
-        <Timeline jobs={jobs} />
+          <h1 className={styles.title}></h1>
+          <Timeline jobs={jobs} />
       </main>
     </div>
   )
