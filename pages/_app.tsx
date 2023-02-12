@@ -1,5 +1,4 @@
 import 'react-vertical-timeline-component/style.min.css';
-import '../styles/timeline.css'
 import '../styles/globals.css'
 import '../styles/theme.css'
 import '../styles/hljs.css'

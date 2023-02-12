@@ -10,17 +10,19 @@ interface TimelineProps {
 }
 
 function toDateRange(j: Job) {
-  return <>{j.startDate} - {j.endDate}</>
+  return <Typography>{j.startDate} - {j.endDate}</Typography>
 }
 
 function toAccomplishment(j: Job) {
   return <>
-    <Typography variant='h5' className={styles.header}>
-      {j.name}
-    </Typography>
-    <Typography variant='h6'>
-      {j.role}
-    </Typography>
+    <div className={styles.itemHeader}>
+      <Typography variant='h3' className='headline-large'>
+        {j.name}
+      </Typography>
+      <Typography variant='h5' className='headline-medium'>
+        {j.role}
+      </Typography>
+    </div>
     <List className='body-large'>
       {j.accomplishments.filter(l => l).map((l, i) => {
         return <>
@@ -34,20 +36,26 @@ function toAccomplishment(j: Job) {
 }
 
 function toTimelineElement(j: Job, key: number): JSX.Element {
+  const position = key % 2 == 0 ? "left" : "right"
+
   return (
-    <TimelineItem key={key}>
-      <TimelineOppositeContent           sx={{ m: 'auto 0' }}
-          variant="body2">
+    <TimelineItem position={position} key={key} className='on-surface-variant-text'>
+      <TimelineOppositeContent
+        sx={{ m: 'auto 0' }}
+        variant="body2"
+      >
         {toDateRange(j)}
       </TimelineOppositeContent>
       <TimelineSeparator>
-        <TimelineDot style={{ backgroundColor: "var(--md-sys-color-tertiary)" }} className='tertiary on-tertiary-text'>
-          <WorkIcon width='48px' height='48px' />
+        <TimelineDot style={{ backgroundColor: "var(--md-sys-color-tertiary)" }} className='on-tertiary-text'>
+          <WorkIcon width='2em' height='2em' />
         </TimelineDot>
-        <TimelineConnector />
+        <TimelineConnector style={{ backgroundColor: "var(--md-sys-color-tertiary)" }} />
       </TimelineSeparator>
-      <TimelineContent className='on-surface-variant-text'>
-        {toAccomplishment(j)}
+      <TimelineContent>
+        <div className={['surface-variant on-surface-variant-text timeline_element_content', styles.content].join(' ')}>
+          {toAccomplishment(j)}
+        </div>
       </TimelineContent>
     </TimelineItem>
   )
@@ -70,6 +78,7 @@ const Timeline = ({ jobs }: TimelineProps) => {
 
   return (
     <MuiTimeline
+      position='alternate'
       className={[styles.timeline, "on-background-text"].join(' ')}
     >
       {data}

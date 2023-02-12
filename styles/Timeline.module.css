@@ -3,11 +3,17 @@
   --line-color: var(--md-ref-palette-tertiary40);
 }
 
-h2.header {
-  color: var(--md-ref-on-surfce-variant-text)
+.content {
+  padding: 1rem;
+  box-shadow:  4px  4px 15px -13px var(--md-sys-color-shadow);
+  border-radius: 1px;
+}
+
+.itemHeader {
+  margin: 0 1rem;
+  text-align: left;
 }
 
 .listItem {
-  margin-bottom: 5px;
-  list-style-type: circle;
+  text-align: left;
 }

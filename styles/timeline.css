@@ -1,9 +1,0 @@
-
-  .vertical-timeline-element-content {
-    box-shadow:  4px  4px 15px -13px var(--md-sys-color-shadow);
-    background: var(--md-sys-color-surface-variant);
-  }
-
-  .vertical-timeline-element-content-arrow {
-    border-right: 10px solid var(--md-sys-color-surface-variant);
-  }
