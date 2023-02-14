@@ -2,7 +2,7 @@ import { Timeline as MuiTimeline, TimelineConnector, TimelineContent, TimelineDo
 import { Job } from './utils/getJobs';
 import styles from '../styles/Timeline.module.css';
 import { WorkIcon } from './workIcon';
-import { List, ListItem, Typography } from '@mui/material';
+import { Grid, List, ListItem, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 
 interface TimelineProps {
@@ -35,14 +35,16 @@ function toAccomplishment(j: Job) {
   </>
 }
 
-function toTimelineElement(j: Job, key: number): JSX.Element {
-  const position = key % 2 == 0 ? "left" : "right"
+function toTimelineElement(j: Job, key: number, m: boolean): JSX.Element {
+  const position = m == true && key % 2 == 0 ? "left" : "right"
+  const displayOpposite = m == false ? "none" : "block"
 
   return (
     <TimelineItem position={position} key={key} className='on-surface-variant-text'>
       <TimelineOppositeContent
         sx={{ m: 'auto 0' }}
         variant="body2"
+        style={{ display: displayOpposite }}
       >
         {toDateRange(j)}
       </TimelineOppositeContent>
@@ -52,7 +54,10 @@ function toTimelineElement(j: Job, key: number): JSX.Element {
         </TimelineDot>
         <TimelineConnector style={{ backgroundColor: "var(--md-sys-color-tertiary)" }} />
       </TimelineSeparator>
-      <TimelineContent>
+      <TimelineContent
+        sx={{ m: 'auto 0' }}
+        variant="body2"
+      >
         <div className={['surface-variant on-surface-variant-text timeline_element_content', styles.content].join(' ')}>
           {toAccomplishment(j)}
         </div>
@@ -74,11 +79,16 @@ const Timeline = ({ jobs }: TimelineProps) => {
     return null
   }
 
-  const data = jobs.sort(byStartDate).map(toTimelineElement)
+  const theme: any = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
+  const data = jobs.sort(byStartDate).map((j, k) => toTimelineElement(j, k, matches))
+
+
+  let position: 'left' | 'alternate' = matches ? 'alternate' : 'left'
 
   return (
     <MuiTimeline
-      position='alternate'
+      position={position}
       className={[styles.timeline, "on-background-text"].join(' ')}
     >
       {data}

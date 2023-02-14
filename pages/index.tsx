@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import Timeline from '../resume/timeline'
@@ -13,14 +14,13 @@ const Resume: NextPage = () => {
       setJobs(j)
     })
   }, [])
-  
+
   return (
-    <div className={styles.container}>
-        <main className={styles.main}>
-          <h1 className={styles.title}></h1>
-          <Timeline jobs={jobs} />
+    <Grid container spacing={1}>
+      <main className={styles.main}>
+        <Timeline jobs={jobs} />
       </main>
-    </div>
+    </Grid>
   )
 }
 
