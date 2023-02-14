@@ -51,6 +51,7 @@
 }
 .tertiary-text {
   color: var(--md-sys-color-tertiary);
+  fill: var(--md-sys-color-tertiary);
 }
 .on-tertiary {
   background-color: var(--md-sys-color-on-tertiary);
