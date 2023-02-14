@@ -2,7 +2,7 @@ import { Timeline as MuiTimeline, TimelineConnector, TimelineContent, TimelineDo
 import { Job } from './utils/getJobs';
 import styles from '../styles/Timeline.module.css';
 import { WorkIcon } from './workIcon';
-import { Grid, List, ListItem, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Badge, Grid, List, ListItem, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 
 interface TimelineProps {
@@ -42,17 +42,19 @@ function toTimelineElement(j: Job, key: number, m: boolean): JSX.Element {
   return (
     <TimelineItem position={position} key={key} className='on-surface-variant-text'>
       <TimelineOppositeContent
-        sx={{ m: 'auto 0' }}
+        sx={{ m: 'auto 0', display: displayOpposite }}
+        
         variant="body2"
-        style={{ display: displayOpposite }}
+        className='on-background-text'
       >
         {toDateRange(j)}
       </TimelineOppositeContent>
       <TimelineSeparator>
-        <TimelineDot style={{ backgroundColor: "var(--md-sys-color-tertiary)" }} className='on-tertiary-text'>
+        <TimelineConnector className='outline'/>
+        <TimelineDot className='tertiary on-tertiary-text'>
           <WorkIcon width='2em' height='2em' />
         </TimelineDot>
-        <TimelineConnector style={{ backgroundColor: "var(--md-sys-color-tertiary)" }} />
+        <TimelineConnector className='outline'/>
       </TimelineSeparator>
       <TimelineContent
         sx={{ m: 'auto 0' }}
